@@ -1,0 +1,54 @@
+import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
+
+/**
+ * Write a description of class newLevel here.
+ * 
+ * @author (your name) 
+ * @version (a version number or a date)
+ */
+public class newLevel extends World
+{
+
+    /**
+     * Constructor for objects of class newLevel.
+     * 
+     */
+    public newLevel()
+    {    
+        // Create a new world with 600x400 cells with a cell size of 1x1 pixels.
+        super(10, 11, 75);
+        prepare();
+        
+    }
+    private void prepare()
+    {     
+   
+       int randA = getInt();
+       int randB = getInt(); 
+        
+  	 for(int a=0;a<10;a++){
+			 for(int b=0;b<10;b++){
+			    if(a==randA&&b==randB)addObject(new BaseCamp(),a,b);
+			    else setLand(a,b);
+			 }
+		 }
+        
+		int i = 0;
+        while(i<=4){addObject(new Person(),getInt(),getInt());i++;}
+        
+        addObject(new Counter(), 7, 10);
+        addObject(new PeopleCounter(), 3, 10);
+        addObject(new SpaceCounterText(),1,10);
+        addObject(new FuelCounterText(),5,10);
+         addObject(new Track(),8,10);
+        addObject(new Robot(), 0 ,0);        
+    }
+    
+    private static int getInt(){ return (int) Math.floor(Math.random()*9+1);}
+    private static int getRand(){ return (int) Math.floor(Math.random()*3+1);}
+    private void setLand(int a,int b){switch(getRand()){
+    case 1: addObject(new Grassland(),a,b); break;
+    case 2: addObject(new Rocks(),a,b); break;
+    case 3: addObject(new Ice(),a,b); break;
+    }}
+}
