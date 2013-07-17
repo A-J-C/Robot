@@ -1,0 +1,37 @@
+import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
+import java.awt.*;
+/**
+ * Write a description of class QuitLevel here.
+ * 
+ * @author (your name) 
+ * @version (a version number or a date)
+ */
+public class QuitLevel extends Actor
+{
+    /**
+     * Act - do whatever the QuitLevel wants to do. This method is called whenever
+     * the 'Act' or 'Run' button gets pressed in the environment.
+     */
+    public int LevelNo = CurrentLevel.levelNo;
+    public void act()
+    {
+        GreenfootImage image = new GreenfootImage(getImage());
+        GreenfootImage text = new GreenfootImage("Level " + getLevel(), 50, Color.BLACK, new Color(0,0,0,0));
+        
+        if (text.getWidth() > image.getWidth() - 20)
+        {
+            image.scale(text.getWidth() + 20, image.getHeight());
+        }
+        
+        image.drawImage(text, (image.getWidth()-text.getWidth())/2, 
+                        (image.getHeight()-text.getHeight())/2);
+        setImage(image);
+    }     
+    public int getLevel(){
+       /* if(CurrentLevel.endNo == -1){return CurrentLevel.levelNo;}
+        else{
+        return CurrentLevel.endNo;
+        }*/
+        return (CurrentLevel.endNo == -1) ? CurrentLevel.levelNo : CurrentLevel.endNo;
+    }
+}
