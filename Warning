@@ -1,0 +1,26 @@
+import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
+
+/**
+ * Write a description of class Warning here.
+ * 
+ * @author (your name) 
+ * @version (a version number or a date)
+ */
+public class Warning extends Actor
+{
+    /**
+     * Act - do whatever the Warning wants to do. This method is called whenever
+     * the 'Act' or 'Run' button gets pressed in the environment.
+     */
+    public int i = 1;
+    public void act() 
+    {   
+        if(i==1){this.setImage("WarningHidden.png");i++;}
+         if (Greenfoot.isKeyDown("enter")){
+            this.setImage("Warning.png");
+        }
+          if(PeopleCounter.carryMax!=0 && Track.type != ""){
+           getWorld().removeObjects(getWorld().getObjects(Warning.class));  
+        }
+    }    
+}
