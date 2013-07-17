@@ -1,0 +1,20 @@
+import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
+import java.awt.Color;
+/**
+ * Write a description of class SpaceCounterText here.
+ * 
+ * @author (your name) 
+ * @version (a version number or a date)
+ */
+public class SpaceCounterText extends Actor
+{
+    /**
+     * Act - do whatever the SpaceCounterText wants to do. This method is called whenever
+     * the 'Act' or 'Run' button gets pressed in the environment.
+     */
+    public void act() 
+    {
+        GreenfootImage img = new GreenfootImage("Space left: ", 48, Color.BLACK, Color.LIGHT_GRAY); 
+        setImage(img);// create title image
+    }    
+}
