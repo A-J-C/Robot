@@ -1,0 +1,32 @@
+import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
+import java.awt.*;
+/**
+ * Write a description of class Level here.
+ * 
+ * @author (your name) 
+ * @version (a version number or a date)
+ */
+public class Level extends Actor
+{
+    /**
+     * Act - do whatever the Level wants to do. This method is called whenever
+     * the 'Act' or 'Run' button gets pressed in the environment.
+     */
+    public int LevelNo = 0; //CurrentLevel.levelNo;
+    public int i = 0;
+    public void act() 
+    {
+        if (i==0){LevelNo = (CurrentLevel.endNo==-1) ? CurrentLevel.levelNo : CurrentLevel.endNo; i++ ;}
+        GreenfootImage image = new GreenfootImage(getImage());
+        GreenfootImage text = new GreenfootImage("Level " + LevelNo, 50, Color.BLACK, new Color(0,0,0,0));
+        
+        if (text.getWidth() > image.getWidth() - 20)
+        {
+            image.scale(text.getWidth() + 20, image.getHeight());
+        }
+        
+        image.drawImage(text, (image.getWidth()-text.getWidth())/2, 
+                        (image.getHeight()-text.getHeight())/2);
+        setImage(image);
+    }    
+}
