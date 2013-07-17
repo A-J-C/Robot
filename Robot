@@ -1,0 +1,128 @@
+import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
+
+/**
+ * Write a description of class Robot here.
+ * 
+ * @author (your name) 
+ * @version (a version number or a date)
+ */
+public class Robot extends Actor
+
+
+{
+public static int power = 150;
+public String tractionType = Track.getType();   
+public int carryLimit =  PeopleCounter.getCarryMax();
+public int carrying = 0;
+public int powerConsumption = 0;
+public String tracks = "";
+public GreenfootImage image;
+public int count = 0;
+public int droppedOff = 0;
+public int peopleInWorld = 4/*getWorld().getObjects(Person.class)*/;
+/**
+     * Act - do whatever the Robot wants to do. This method is called whenever
+     * the 'Act' or 'Run' button gets pressed in the environment.
+     */
+    private void setPower() {power = 155-(CurrentLevel.levelNo * 5); }
+    public void hacks(){
+      if (Greenfoot.isKeyDown("f")){droppedOff = peopleInWorld;}  
+      if (Greenfoot.isKeyDown("j")){power = 0;}  
+    }
+    
+    public void act() 
+    {
+     if(count == 0){image();((PeopleCounter) getWorld().getObjects(PeopleCounter.class).get(0)).setValue(carryLimit); setPower(); ((Counter) getWorld().getObjects(Counter.class).get(0)).setValue(power); }
+     Greenfoot.setSpeed(25);
+        if (Greenfoot.isKeyDown("right")||Greenfoot.isKeyDown("d")){
+        setRotation(0);
+        processes();
+    }    else  if (Greenfoot.isKeyDown("left")||Greenfoot.isKeyDown("a")){
+        setRotation(180);    
+        processes();
+    }    else  if (Greenfoot.isKeyDown("up")||Greenfoot.isKeyDown("w")){
+        setRotation(270);
+        processes();
+    }    else  if (Greenfoot.isKeyDown("down")||Greenfoot.isKeyDown("s")){
+        setRotation(90);
+        if(inBoundaries()==true){processes();}   
+    }
+    if(power < 0){
+             Greenfoot.setWorld(new EndWorld());
+        }
+    hacks();
+}
+   
+    public void processes(){
+        move(1);
+        pickUp();
+        powerConsumption(landType());
+        baseCamp();
+        image();
+        win();
+    }    
+    public boolean inBoundaries(){
+        if(getY()==9){return false;}
+        else{return true;}
+    }
+    public void image(){
+        this.setImage("Ship"+carryLimit+carrying+".png");
+        count++;
+    }
+    public void win(){
+        if(power>=0 && droppedOff == peopleInWorld){Greenfoot.setWorld(new WinWorld());}
+    }
+    public int power(){
+                if(tractionType=="Wheels"){
+                    if(landType()=="ice"){return 3;}
+                    if(landType()=="rock"){return 2;}
+                    if(landType()=="grass"){return 1;}
+               }
+               if(tractionType=="Tracks"){
+                    if(landType()=="ice"){return 3;}
+                    if(landType()=="rock"){return 3;}
+                    if(landType()=="grass"){return 3;}
+               }
+               if(tractionType=="Skis"){
+                    if(landType()=="ice"){return 1;}
+                    if(landType()=="rock"){return 3;}
+                    if(landType()=="grass"){return 3;}
+               }
+            return 0;
+}
+    public void powerConsumption(String land){
+   int currentPower = power();
+   
+   if(carryLimit==2){currentPower+=1;}
+   if(carryLimit==3){currentPower+=2;}
+   
+   if(land=="rock"){power -= currentPower; ((Counter) getWorld().getObjects(Counter.class).get(0)).add(-currentPower); }
+   if(land=="grass"){power -= currentPower; ((Counter) getWorld().getObjects(Counter.class).get(0)).add(-currentPower); }
+   if(land=="ice"){power -= currentPower; ((Counter) getWorld().getObjects(Counter.class).get(0)).add(-currentPower); }
+   
+}
+    public void pickUp(){
+        Actor person = getOneObjectAtOffset(0,0,Person.class);
+        if( person!= null && carryLimit>carrying){
+            getWorld().removeObject(person);
+            ((PeopleCounter) getWorld().getObjects(PeopleCounter.class).get(0)).add(-1); 
+            carrying++;
+        }
+    }
+    public String landType(){
+    Actor rock = getOneObjectAtOffset(0,0,Rocks.class);
+    Actor grass = getOneObjectAtOffset(0,0,Grassland.class);
+    Actor ice = getOneObjectAtOffset(0,0,Ice.class);
+    if (rock != null){return "rock";}   
+    if (grass != null){return "grass";}   
+    if (ice != null){return "ice";}   
+    return "";
+    }
+    public void baseCamp(){
+        if(getOneObjectAtOffset(0,0,BaseCamp.class) != null){
+           droppedOff += carrying; 
+           carrying = 0;
+           ((PeopleCounter) getWorld().getObjects(PeopleCounter.class).get(0)).setValue(carryLimit);
+        }
+    }
+}
