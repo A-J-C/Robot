@@ -1,0 +1,30 @@
+import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
+
+/**
+ * Write a description of class CurrentLevel here.
+ * 
+ * @author (your name) 
+ * @version (a version number or a date)
+ */
+public class CurrentLevel extends Actor
+{
+    /**
+     * Act - do whatever the CurrentLevel wants to do. This method is called whenever
+     * the 'Act' or 'Run' button gets pressed in the environment.
+     */
+    public static int levelNo = 1;
+    public static int endNo = -1;
+    public boolean choice = true;
+    public void act() { 
+    while(choice){set();choice=false;}
+    }
+    
+    public void set(){
+    if(getWorld() instanceof EndWorld){endNo=levelNo;levelNo = 1;}
+    if(getWorld() instanceof WinWorld){levelNo++; Track.setType("");
+            BayMenu.setNumber(0); }
+   }
+   public static void reset(){
+    endNo = -1; levelNo = 1;
+    }
+}
