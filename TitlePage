@@ -1,0 +1,37 @@
+import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
+
+/**
+ * Write a description of class TitlePage here.
+ * 
+ * @author (your name) 
+ * @version (a version number or a date)
+ */
+public class TitlePage extends World
+{
+
+    /**
+     * Constructor for objects of class TitlePage.
+     * 
+     */
+    public TitlePage()
+    {    
+        // Create a new world with 600x400 cells with a cell size of 1x1 pixels.
+        super(750, 750, 1); 
+
+        prepare();
+    }
+
+    /**
+     * Prepare the world for the start of the program. That is: create the initial
+     * objects and add them to the world.
+     */
+    private void prepare()
+    {
+        addObject(new nextLevel(), 391, 457);  
+        addObject(new TrackMenu(), 530, 375);
+        addObject(new BayMenu(), 200, 375);
+        addObject(new quit(), 38, 20);
+        addObject(new Level(), 335, 315);
+        addObject(new Warning(),  376, 679); 
+    }
+}
