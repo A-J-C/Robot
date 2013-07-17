@@ -1,0 +1,30 @@
+import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
+
+/**
+ * Write a description of class Track here.
+ * 
+ * @author (your name) 
+ * @version (a version number or a date)
+ */
+
+public class Track extends Actor
+{
+    static String type = "";
+    
+    public static String getType(){
+    return type;
+    }
+    public static void setType(String a){
+    type = a;
+    }
+    /**
+     * Act - do whatever the Track wants to do. This method is called whenever
+     * the 'Act' or 'Run' button gets pressed in the environment.
+     */
+    
+    public void act() 
+    {
+       this.setImage("Type"+type+".png");
+        
+        }
+    }    
