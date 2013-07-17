@@ -1,0 +1,35 @@
+import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
+
+/**
+ * Write a description of class TrackMenu here.
+ * 
+ * @author (your name) 
+ * @version (a version number or a date)
+ */
+public class TrackMenu extends Actor
+{
+    /**
+     * Act - do whatever the TrackMenu wants to do. This method is called whenever
+     * the 'Act' or 'Run' button gets pressed in the environment.
+     */
+    public int count = 1;
+    public int number;
+    Wheels wheels = new Wheels();
+    Tracks tracks = new Tracks();
+    Skis skis = new Skis();
+    public void act() 
+    {   
+        if(count%2==0){
+        getWorld().addObject(wheels, 530, 510);
+        getWorld().addObject(tracks, 530, 450);
+        getWorld().addObject(skis, 530, 570);  
+        }else{
+        getWorld().removeObjects(getWorld().getObjects(Wheels.class));  
+        getWorld().removeObjects(getWorld().getObjects(Tracks.class));  
+        getWorld().removeObjects(getWorld().getObjects(Skis.class));  
+        }
+        if(count%2==0){number=1;}
+        else{number=2;}
+        if(Greenfoot.mouseClicked(this)){setImage("TractionType"+number+".png");count++;}
+    }    
+}
