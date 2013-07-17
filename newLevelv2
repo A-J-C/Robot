@@ -1,0 +1,78 @@
+import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
+
+/**
+ * Write a description of class newLevelv2 here.
+ * 
+ * @author (your name) 
+ * @version (a version number or a date)
+ */
+public class newLevelv2 extends World
+{
+
+    /**
+     * Constructor for objects of class newLevelv2.
+     * 
+     */
+    public newLevelv2()
+    {    
+        // Create a new world with 600x400 cells with a cell size of 1x1 pixels.
+        super(10, 11, 75);
+        prepare();
+        
+    }
+    private void prepare()
+    {     
+   
+       int randA = getInt();
+       int randB = getInt(); 
+        
+  	 for(int a=0;a<10;a++){
+			 for(int b=0;b<10;b++){
+			    if(a==randA&&b==randB)addObject(new BaseCamp(),a,b);
+			    else setLand(a,b);
+			 }
+		 }
+        
+        int[] xPos= new int[10];
+        int[] yPos= new int[10];
+        
+        int l = 0;
+        while(l<10){
+        int lA = getInt(), lB = getInt();
+        xPos[l] = lA;
+        yPos[l] = lB;
+        addObject(new Lava(),lA,lB);
+        l++;
+        }
+        
+        int i = 0;
+        while(i<=4){
+        int a = getInt(), b = getInt();
+        if(a!=randA || b!=randB) {
+        for(int z=0;z<10;z++){
+        if(a!= xPos[z] || b!= yPos[z]){
+        addObject(new Person(),a,b);
+        i++;
+        break;
+        }
+        }
+        }
+        }
+        
+        addObject(new Counter(), 7, 10);
+        addObject(new PeopleCounter(), 3, 10);
+        addObject(new SpaceCounterText(),1,10);
+        addObject(new FuelCounterText(),5,10);
+        addObject(new Track(),8,10);
+        addObject(new Robot(), 0 ,0);        
+    }
+    
+    private static int getInt(){ return (int) Math.floor(Math.random()*9+1);}
+    private static int getRand(){ return (int) Math.floor(Math.random()*3+1);}
+    private void setLand(int a,int b){switch(getRand()){
+    case 1: addObject(new Grassland(),a,b); break;
+    case 2: addObject(new Rocks(),a,b); break;
+    case 3: addObject(new Ice(),a,b); break;
+}
+}
+}
