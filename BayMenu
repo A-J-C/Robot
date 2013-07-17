@@ -1,0 +1,39 @@
+import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
+
+/**
+ * Write a description of class BayMenu here.
+ * 
+ * @author (your name) 
+ * @version (a version number or a date)
+ */
+public class BayMenu extends Actor
+{
+    /**
+     * Act - do whatever the BayMenu wants to do. This method is called whenever
+     * the 'Act' or 'Run' button gets pressed in the environment.
+     */
+    public int count = 1;
+    public static int number = 0;
+    PeopleSmall small = new PeopleSmall();
+    PeopleMedium medium = new PeopleMedium();
+    PeopleLarge large = new PeopleLarge();
+    public void act() 
+    {   
+        if(count%2==0){
+        getWorld().addObject(small, 200, 450);
+        getWorld().addObject(medium,  200, 510);
+        getWorld().addObject(large,  200, 570); 
+        }else{
+        getWorld().removeObjects(getWorld().getObjects(PeopleSmall.class));  
+        getWorld().removeObjects(getWorld().getObjects(PeopleMedium.class));  
+        getWorld().removeObjects(getWorld().getObjects(PeopleLarge.class));  
+        }
+        if(count%2==0){number=1;}
+        else{number=2;}
+        if(Greenfoot.mouseClicked(this)){setImage("BaySize"+number+".png");count++;}
+        
+    }   
+    public static void setNumber(int a){
+    number = a;
+    }
+}
